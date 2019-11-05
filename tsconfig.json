@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "rootDirs": [
+      "../src",
+      "."
+    ],
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": [
+      "es5",
+      "es2015",
+      "dom",
+      "esnext",
+      "scripthost"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ]
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./**/*.spec.ts",
+    "./output"
+  ]
+}
