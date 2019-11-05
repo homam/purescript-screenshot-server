@@ -12,6 +12,7 @@ You can edit this file as you like.
     , "effect"
     , "express"
     , "js-date"
+    , "node-process"
     , "now"
     , "psci-support"
     ]

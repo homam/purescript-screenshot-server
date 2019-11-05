@@ -4,7 +4,7 @@ import Prelude hiding (apply)
 
 import Control.Monad.Error.Class (throwError)
 import Data.Either (Either(..))
-import Data.Int (fromNumber, toNumber)
+import Data.Int (fromNumber, fromString, toNumber)
 import Data.Maybe (fromMaybe, maybe)
 import Effect (Effect)
 import Effect.Aff (attempt)
@@ -19,6 +19,7 @@ import Node.Express.Request (getQueryParam)
 import Node.Express.Response (redirect, send, setStatus)
 import Node.HTTP (Server)
 import ScreenshotServer (ScreenshotsCache, mkScreenshotsCache, screenshotAndUploadSync)
+import Node.Process (lookupEnv)
 
 newtype AppState = AppState {
     screenhostsCache :: Ref.Ref ScreenshotsCache
@@ -41,5 +42,9 @@ app = do
 
 main :: Effect Server
 main = do
-    listenHttp app 8080 \_ ->
-        log $ "Listening on " <> show 8080
+    port <- (parseInt <<< fromMaybe "8080") <$> lookupEnv "PORT"
+    listenHttp app port \_ ->
+        log $ "Listening on " <> show port
+
+parseInt :: String -> Int
+parseInt str = fromMaybe 0 $ fromString str
